@@ -1,3 +1,4 @@
+---
 {{ if .Values.adlists }}
 apiVersion: v1
 kind: ConfigMap

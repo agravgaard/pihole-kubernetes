@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 description: Installs pihole in kubernetes
 home: https://github.com/agravgaard/pihole-kubernetes/tree/master/charts/pihole
