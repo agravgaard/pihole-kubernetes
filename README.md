@@ -5,23 +5,23 @@
 
 [Helm](https://helm.sh) repo for different charts which can be installed on [Kubernetes](https://kubernetes.io)
 
-Further documentation including chart keys, types, and default values is at https://hub.helm.sh/charts/agrvavgaard/pihole
+Further documentation including chart keys, types, and default values is at https://hub.helm.sh/charts/agravgaard/pihole
 
 ### Add Helm repository
 
 To install the repo just run:
 
 ```bash
-helm repo add agrvavgaard https://agrvavgaard.github.io/pihole-kubernetes/
+helm repo add agravgaard https://agravgaard.github.io/pihole-kubernetes/
 helm repo update
 ```
 
 ### Helm Charts
 
-* [pihole](https://agrvavgaard.github.io/pihole-kubernetes)
+* [pihole](https://agravgaard.github.io/pihole-kubernetes)
 
   ```bash
-  helm install your-release agrvavgaard/pihole
+  helm install your-release agravgaard/pihole
   ```
 
 
