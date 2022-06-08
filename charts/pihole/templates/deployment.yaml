@@ -96,8 +96,7 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           resources:
-            limits:
-              memory: 128Mi
+{{ toYaml .Values.doh.resources | indent 12 }}
           ports:
             - containerPort: 5053
               name: cloudflared-udp
