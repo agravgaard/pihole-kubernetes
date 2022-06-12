@@ -10,9 +10,6 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 data:
-  {{- $files := .Files }}
-  {{- range tuple "pi-hole.conf" }}
-  {{ . }}: |-
-        {{ $files.Get . }}
-  {{- end }}
+  pi-hole.conf: |-
+        {{ .Files.Get "pi-hole.conf" }}
 {{ end }}
