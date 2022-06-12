@@ -147,7 +147,9 @@ spec:
               command:
                 - dig
                 - sigok.verteiltesysteme.net
-                - "@127.0.0.1" -p 5053
+                - "@127.0.0.1"
+                - -p
+                - 5053
             initialDelaySeconds: {{ .Values.unbound.probes.liveness.initialDelaySeconds }}
             failureThreshold: {{ .Values.unbound.probes.liveness.failureThreshold }}
             timeoutSeconds: {{ .Values.unbound.probes.liveness.timeoutSeconds }}
