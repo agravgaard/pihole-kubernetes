@@ -11,12 +11,8 @@ metadata:
     heritage: {{ .Release.Service }}
 data:
   pi-hole.conf: |
-    server:
-        # Include defaults, then override
-        include: /etc/unbound/unbound.conf
-
-        # If no logfile is specified, syslog is used
-        # logfile: "/var/log/unbound/unbound.log"
+    # Include defaults, then override
+    include: /etc/unbound/unbound.conf
         # The verbosity number, level 0 means no verbosity, only errors.
         # Level 1 gives operational information.
         # Level 2 gives detailed operational information.
@@ -24,7 +20,6 @@ data:
         # Level 4 gives algorithm level information.
         # Level 5 logs client identification for cache misses.
         verbosity: 2
-
         interface: 127.0.0.1
         port: 5053
 {{ end }}

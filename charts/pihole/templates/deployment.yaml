@@ -123,7 +123,7 @@ spec:
         - name: unbound
           image: "{{ .Values.unbound.repository }}:{{ .Values.unbound.tag }}"
           imagePullPolicy: {{ .Values.unbound.pullPolicy }}
-          args: ["-c", "/etc/unbound/unbound.conf.d/pi-hole.conf"]
+          args: ["-c", "/etc/unbound/pi-hole.conf"]
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           resources:
@@ -153,7 +153,7 @@ spec:
           {{- end }}
           volumeMounts:
             - name: unbound-conf-volume
-              mountPath: /etc/unbound/unbound.conf.d/pi-hole.conf
+              mountPath: /etc/unbound/pi-hole.conf
         {{- end }}
         - name: {{ .Chart.Name }}
           env:
