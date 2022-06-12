@@ -22,4 +22,4 @@ data:
         verbosity: 2
         interface: 127.0.0.1
         port: 5053
-{{ end }}
+{{- end }}
