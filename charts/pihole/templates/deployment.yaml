@@ -123,9 +123,7 @@ spec:
         - name: unbound
           image: "{{ .Values.unbound.repository }}:{{ .Values.unbound.tag }}"
           imagePullPolicy: {{ .Values.unbound.pullPolicy }}
-          command: [ "/bin/sh", "-c", "--" ]
-          args: [ "while true; do sleep 30; done;" ]
-          # args: ["-c", "/etc/unbound/pi-hole.conf", "-vv"]
+          args: ["-c", "/etc/unbound/pi-hole.conf"]
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           resources:
