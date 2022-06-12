@@ -315,6 +315,33 @@ doh:
       # requests:
       #   cpu: 100m
       #   memory: 128Mi
+unbound:
+  # -- set to true to enabled DNS over HTTPs via cloudflared
+  enabled: false
+  name: "unbound"
+  repository: "klutchell/unbound"
+  tag: latest
+  pullPolicy: IfNotPresent
+  envVars: {}
+
+  # -- Probes configuration
+  probes:
+    # -- Configure the healthcheck for the container
+    liveness:
+      # -- set to true to enable liveness probe
+      enabled: true
+      # -- defines the initial delay for the liveness probe
+      initialDelaySeconds: 60
+      # -- defines the failure threshold for the liveness probe
+      failureThreshold: 10
+      # -- defines the timeout in secondes for the liveness probe
+      timeoutSeconds: 5
+  resources:
+    limits:
+      memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
 
 dnsmasq:
   # -- Add upstream dns servers. All lines will be added to the pihole dnsmasq configuration

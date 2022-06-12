@@ -274,6 +274,19 @@ The following table lists the configurable parameters of the pihole chart and th
 | strategyType | string | `"RollingUpdate"` | The `spec.strategyTpye` for updates |
 | tolerations | list | `[]` |  |
 | topologySpreadConstraints | list | `[]` | Specify a priorityClassName priorityClassName: "" Reference: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/ |
+| unbound.enabled | bool | `false` | set to true to enable recursive DNS with unbound |
+| unbound.envVars | object | `{}` | Here you can pass environment variables to the container |
+| unbound.name | string | `"unbound"` |  |
+| unbound.probes | object | `{"liveness":{"enabled":true,"failureThreshold":10,"initialDelaySeconds":60,"timeoutSeconds":5}}` | Probes configuration |
+| unbound.probes.liveness | object | `{"enabled":true,"failureThreshold":10,"initialDelaySeconds":60,"timeoutSeconds":5}` | Configure the healthcheck for the unbound container |
+| unbound.probes.liveness.enabled | bool | `true` | set to true to enable liveness probe |
+| unbound.probes.liveness.failureThreshold | int | `10` | defines the failure threshold for the liveness probe |
+| unbound.probes.liveness.initialDelaySeconds | int | `60` | defines the initial delay for the liveness probe |
+| unbound.probes.liveness.timeoutSeconds | int | `5` | defines the timeout in secondes for the liveness probe |
+| unbound.pullPolicy | string | `"IfNotPresent"` |  |
+| unbound.repository | string | `"klutchell/unbound"` |  |
+| unbound.resources | object | `{}` | lines, adjust them as necessary. |
+| unbound.tag | string | `"latest"` |  |
 | virtualHost | string | `"pi.hole"` |  |
 | webHttp | string | `"80"` | port the container should use to expose HTTP traffic |
 | webHttps | string | `"443"` | port the container should use to expose HTTPS traffic |

@@ -119,6 +119,43 @@ spec:
             timeoutSeconds: {{ .Values.doh.probes.liveness.timeoutSeconds }}
           {{- end }}
         {{- end }}
+        {{- if .Values.unbound.enabled }}
+        - name: unbound
+          image: "{{ .Values.unbound.repository }}:{{ .Values.unbound.tag }}"
+          imagePullPolicy: {{ .Values.unbound.pullPolicy }}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          resources:
+{{ toYaml .Values.unbound.resources | indent 12 }}
+          ports:
+            - containerPort: 5053
+              name: unbound-udp
+              protocol: UDP
+            - containerPort: 5053
+              name: unbound-tcp
+              protocol: TCP
+          {{- if .Values.unbound.envVars }}
+          env:
+            {{- range $key, $value := .Values.unbound.envVars }}
+          - name: {{ $key | quote }}
+            value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.unbound.probes.liveness.enabled }}
+          livenessProbe:
+            exec:
+              command:
+                - dig
+                - sigok.verteiltesysteme.net
+                - "@127.0.0.1"
+            initialDelaySeconds: {{ .Values.unbound.probes.liveness.initialDelaySeconds }}
+            failureThreshold: {{ .Values.unbound.probes.liveness.failureThreshold }}
+            timeoutSeconds: {{ .Values.unbound.probes.liveness.timeoutSeconds }}
+          {{- end }}
+          volumeMounts:
+            - name: unbound-conf-volume
+              mountPath: /etc/unbound/unbound.conf.d/
+        {{- end }}
         - name: {{ .Chart.Name }}
           env:
           - name: 'WEB_PORT'
@@ -141,7 +178,7 @@ spec:
                 key: {{ $value.key | quote }}
                 name: {{ $value.name | quote }}
           {{- end }}
-          {{- if .Values.doh.enabled }}
+          {{- if (or .Values.doh.enabled .Values.unbound.enabled) }}
           - name: 'DNS1'
             value: "127.0.0.1#5053"
           - name: DNS2
@@ -310,6 +347,11 @@ spec:
           defaultMode: 420
           name: {{ template "pihole.fullname" . }}-regex
         name: regex
+      {{- end }}
+      {{- if .Values.unbound.enabled }}
+      - configMap:
+          name: unbound-pihole-conf
+        name: unbound-conf-volume
       {{- end }}
       {{- range $key, $value := .Values.extraVolumes }}
       - name: {{ $key }}
