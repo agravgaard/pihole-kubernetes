@@ -23,7 +23,7 @@ data:
         # Level 3 gives query level information, output per query.
         # Level 4 gives algorithm level information.
         # Level 5 logs client identification for cache misses.
-        verbosity: 0
+        verbosity: 2
 
         interface: 127.0.0.1
         port: 5053
