@@ -155,7 +155,7 @@ spec:
           {{- end }}
           volumeMounts:
             - name: unbound-conf-volume
-              mountPath: /etc/unbound/pi-hole.conf
+              mountPath: /etc/unbound/
         {{- end }}
         - name: {{ .Chart.Name }}
           env:
